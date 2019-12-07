@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "./components/NavBar";
 import Footer from "./components/Footer";
-import Home from "./pages/Home";
+import Home from "./components/Home";
 import BeerForm from "./pages/BeerForm";
 import BreweryForm from "./pages/BreweryForm";
 
