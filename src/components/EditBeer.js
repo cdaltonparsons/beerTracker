@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Background from "../images/hops.jpg";
+import Background from "../images/beers.jpg";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -9,15 +9,17 @@ const backgroundImg = {
   color: "white"
 };
 
-class BreweryForm extends Component {
+class BeerForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      breweryName: "",
-      beerName: "",
-      location: "",
-      overallRating: 5,
-      date: new Date()
+      _id: this.props._id,
+      beerName: this.props.beerName,
+      breweryName: this.props.breweryName,
+      beerStyle: this.props.beerStyle,
+      tastingNotes: this.props.tastingNotes,
+      overallRating: this.props.overallRating,
+      date: this.props.date
     };
   }
 
@@ -38,18 +40,12 @@ class BreweryForm extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
 
-    const brewery = {
-      breweryName: this.state.breweryName,
-      beerName: this.state.beerName,
-      location: this.state.location,
-      overallRating: this.state.overallRating,
-      date: this.state.date
-    };
-    console.log(brewery);
-
     axios
-      .post("http://localhost5000/breweries/", brewery)
-      .then(res => console.log(res.data));
+      .put("http://localhost:5000/beers/update/" + this.state._id, this.state)
+      .then(() => {
+        this.loadBeers();
+      })
+      .catch(err => console.log("Error: " + err));
   };
 
   render() {
@@ -57,33 +53,21 @@ class BreweryForm extends Component {
       <>
         <div className="jumbotron text-center" style={backgroundImg}>
           <h1 className="display-3">
-            Keep track of your favorite (or least favorite...) breweries here
+            Keep track of your favorite (or least favorite...) beers here
           </h1>
-          <h3>Fill in the form below to save breweries to your profile.</h3>
+          <p className="lead">
+            Fill in the form below to save beers to your profile.
+          </p>
         </div>
         <div className="row">
           <div className="col-md-2"></div>
           <div className="col-md-8">
             <form>
               <fieldset>
-                <legend>Add a New Brewery</legend>
-                <div className="form-group">
-                  <label className="col-form-label" htmlFor="breweryName">
-                    Name of Brewery
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Name of Brewery"
-                    id="breweryName"
-                    name="breweryName"
-                    onChange={this.handleInputChange}
-                    value={this.state.breweryName}
-                  />
-                </div>
+                <legend>Edit Beer</legend>
                 <div className="form-group">
                   <label className="col-form-label" htmlFor="beerName">
-                    Name of Beer(s) sampled (feel free to add several, separated with commas)
+                    Name of Beer
                   </label>
                   <input
                     type="text"
@@ -91,26 +75,52 @@ class BreweryForm extends Component {
                     placeholder="Name of Beer"
                     id="beerName"
                     name="beerName"
-                    onChange={this.handleInputChange}
                     value={this.state.beerName}
+                    onChange={this.handleInputChange}
                   />
                 </div>
                 <div className="form-group">
-                  <label className="col-form-label" htmlFor="location">
-                    Location
+                  <label className="col-form-label" htmlFor="breweryName">
+                    Brewery Name
                   </label>
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="e.g. Denver, CO"
-                    id="breweryLocation"
-                    name="location"
-                    value={this.state.location}
+                    placeholder="Brewery Name"
+                    id="breweryName"
+                    name="breweryName"
+                    value={this.state.breweryName}
                     onChange={this.handleInputChange}
                   />
                 </div>
                 <div className="form-group">
-                  <label>Date Visited: </label>
+                  <label className="col-form-label" htmlFor="beerStyle">
+                    Beer Style
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Beer Style"
+                    id="beerStyle"
+                    name="beerStyle"
+                    value={this.state.beerStyle}
+                    onChange={this.handleInputChange}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="tastingNotes">Enter tasting notes here</label>
+                  <textarea
+                    className="form-control"
+                    id="tastingNotes"
+                    rows="3"
+                    name="tastingNotes"
+                    placeholder={this.state.tastingNotes}
+                    value={this.state.tastingNotes}
+                    onChange={this.handleInputChange}
+                  ></textarea>
+                </div>
+                <div className="form-group">
+                  <label>Date Tasted: </label>
                   <div>
                     <DatePicker
                       selected={this.state.date}
@@ -120,9 +130,7 @@ class BreweryForm extends Component {
                   </div>
                 </div>
                 <div className="form-group">
-                  <label className="col-form-label" htmlFor="overallRating">
-                    Overall Rating
-                  </label>
+                  <label htmlFor="overallRating">Overall Rating</label>
                   <select
                     className="form-control"
                     id="overallRating"
@@ -139,7 +147,7 @@ class BreweryForm extends Component {
                     <option value="7">7</option>
                     <option value="8">8</option>
                     <option value="9">9</option>
-                    <option value="10">10 (New favorite brewery)</option>
+                    <option value="10">10 (New favorite beer)</option>
                   </select>
                 </div>
                 <button
@@ -159,4 +167,4 @@ class BreweryForm extends Component {
   }
 }
 
-export default BreweryForm;
+export default BeerForm;

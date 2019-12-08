@@ -13,11 +13,12 @@ class BreweryForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      breweryName: "",
-      beerName: "",
-      location: "",
-      overallRating: 5,
-      date: new Date()
+      _id: this.props._id,
+      breweryName: this.props.breweryName,
+      beerName: this.props.beerName,
+      location: this.props.location,
+      overallRating: this.props.overallRating,
+      date: this.props.date
     };
   }
 
@@ -38,18 +39,15 @@ class BreweryForm extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
 
-    const brewery = {
-      breweryName: this.state.breweryName,
-      beerName: this.state.beerName,
-      location: this.state.location,
-      overallRating: this.state.overallRating,
-      date: this.state.date
-    };
-    console.log(brewery);
-
     axios
-      .post("http://localhost5000/breweries/", brewery)
-      .then(res => console.log(res.data));
+      .put(
+        "http://localhost5000/breweries/update/" + this.state._id,
+        this.state
+      )
+      .then(() => {
+        this.loadBreweries();
+      })
+      .catch(err => console.log("Error: " + err));
   };
 
   render() {
@@ -66,7 +64,7 @@ class BreweryForm extends Component {
           <div className="col-md-8">
             <form>
               <fieldset>
-                <legend>Add a New Brewery</legend>
+                <legend>Edit Brewery Information</legend>
                 <div className="form-group">
                   <label className="col-form-label" htmlFor="breweryName">
                     Name of Brewery
@@ -74,7 +72,7 @@ class BreweryForm extends Component {
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Name of Brewery"
+                    placeholder={this.props.breweryName}
                     id="breweryName"
                     name="breweryName"
                     onChange={this.handleInputChange}
@@ -83,12 +81,12 @@ class BreweryForm extends Component {
                 </div>
                 <div className="form-group">
                   <label className="col-form-label" htmlFor="beerName">
-                    Name of Beer(s) sampled (feel free to add several, separated with commas)
+                  Name of Beer(s) sampled (feel free to add several, separated with commas)
                   </label>
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Name of Beer"
+                    placeholder="e.g. Coors Banquet"
                     id="beerName"
                     name="beerName"
                     onChange={this.handleInputChange}

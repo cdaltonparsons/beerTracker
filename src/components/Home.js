@@ -13,10 +13,10 @@ const btnStyle = {
 
 function Home() {
   return (
-    <div className="jumbotron" style={backgroundImg}>
-      <h1 className="display-3">Welcome to **beer app title here**</h1>
+    <div className="jumbotron text-center" style={backgroundImg}>
+      <h1 className="display-3">Welcome to Drinking Buddy!</h1>
       <h3>Keep track of your favorite beers and breweries</h3>
-      <p className="lead">
+      <div className="lead justify-content-center text-center">
         <Link className="btn btn-primary btn-lg" to="/beer" role="button">
           Your Favorite Beers
         </Link>
@@ -28,10 +28,10 @@ function Home() {
         >
           Your Favorite Breweries
         </Link>
-      </p>
+      </div>
       <hr className="my-4" />
       <p>Start by signing up or logging in below</p>
-      <p className="lead">
+      <div className="lead text-center justify-content-center">
         <Link className="btn btn-info btn-lg" to="#" role="button">
           Sign Up
         </Link>
@@ -43,7 +43,7 @@ function Home() {
         >
           Log In
         </Link>
-      </p>
+      </div>
     </div>
   );
 }

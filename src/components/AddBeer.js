@@ -50,13 +50,23 @@ class BeerForm extends Component {
 
     axios
       .post("http://localhost:5000/beers/add", beer)
-      .then(res => console.log(res.data));
+      .then(res => alert(`Cheers! ${this.state.beerName} has successfully been added`));
+
+      this.setState({
+        beerName: "",
+        breweryName: "",
+        beerStyle: "",
+        tastingNotes: "",
+        overallRating: 5,
+        date: new Date()
+      })
+
   };
 
   render() {
     return (
       <>
-        <div className="jumbotron" style={backgroundImg}>
+        <div className="jumbotron text-center" style={backgroundImg}>
           <h1 className="display-3">
             Keep track of your favorite (or least favorite...) beers here
           </h1>

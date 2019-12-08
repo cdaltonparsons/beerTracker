@@ -1,12 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+const navText = {
+  fontSize: "24px"
+}
+
 function Navbar() {
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+      <nav className="navbar navbar-expand-lg navbar-dark fixed-top bg-primary" style={navText}>
         <Link className="navbar-brand" to="/">
-          *Title goes here*
+          Drinking Buddy
         </Link>
         <button
           className="navbar-toggler"
@@ -38,16 +42,6 @@ function Navbar() {
               </Link>
             </li>
           </ul>
-          <form className="form-inline my-2 my-lg-0">
-            <input
-              className="form-control mr-sm-2"
-              type="text"
-              placeholder="Search"
-            />
-            <button className="btn btn-secondary my-2 my-sm-0" type="submit">
-              Search
-            </button>
-          </form>
         </div>
       </nav>
     </>
