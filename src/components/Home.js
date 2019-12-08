@@ -1,5 +1,11 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import Background from "../images/beersHome.jpg";
+
+const backgroundImg = {
+  backgroundImage: `url(${Background})`,
+  color: 'white'
+}
 
 const btnStyle = {
   marginLeft: 10
@@ -7,7 +13,7 @@ const btnStyle = {
 
 function Home() {
   return (
-    <div className="jumbotron">
+    <div className="jumbotron" style={backgroundImg}>
       <h1 className="display-3">Welcome to **beer app title here**</h1>
       <h3>Keep track of your favorite beers and breweries</h3>
       <p className="lead">

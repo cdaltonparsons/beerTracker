@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // Creating the model for the beers table
@@ -7,9 +7,10 @@ const beerSchema = new Schema({
   breweryName: { type: String,  trim: true  },
   beerStyle: { type: String,  trim: true  },
   tastingNotes: { type: String,  trim: true  },
-  recommend: { type: Boolean }
+  overallRating: { type: Number },
+  date: { type: Date}
 });
 
-const Beer = mongoose.model("Beer", beerSchema);
+const Beer = mongoose.model('Beer', beerSchema);
 
 module.exports = Beer;
