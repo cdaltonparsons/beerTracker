@@ -7,7 +7,6 @@ const brewerySchema = new Schema({
   beerName: { type: String, trim: true  },
   location: { type: String, trim: true  },
   overallRating: { type: Number },
-  date: { type: Date}
 });
 
 const Brewery = mongoose.model('Brewery', brewerySchema);

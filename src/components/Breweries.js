@@ -3,8 +3,7 @@ import BreweryCard from "./BreweryCard";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Background from "../images/beers.jpg";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+
 
 const backgroundImg = {
   backgroundImage: `url(${Background})`,
@@ -17,7 +16,8 @@ const btnStyle = {
 
 class Breweries extends Component {
   state = {
-    breweries: []
+    breweries: [],
+    editActive: false
   };
 
   componentDidMount() {
@@ -41,10 +41,10 @@ class Breweries extends Component {
           <div className="lead justify-content-center text-center">
             <Link
               className="btn btn-primary btn-lg"
-              to="/addbrewery"
+              to="/beers"
               role="button"
             >
-              Click here to add more breweries!
+              Click here to see beers you've saved!
             </Link>
             <Link
               className="btn btn-success btn-lg"
@@ -62,13 +62,14 @@ class Breweries extends Component {
               {this.state.breweries.map(brewery => (
                 <BreweryCard
                   brewery={brewery}
+                  _id={brewery._id}
                   key={brewery._id}
                   beerName={brewery.beerName}
                   breweryName={brewery.breweryName}
                   location={brewery.location}
                   overallRating={brewery.overallRating}
-                  date={brewery.date}
                   loadBreweries={this.loadBreweries}
+                  editActive={this.state.editActive}
                 />
               ))}
             </div>

@@ -3,8 +3,7 @@ import BeerCard from "./BeerCard";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Background from "../images/beers.jpg";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+
 
 const backgroundImg = {
   backgroundImage: `url(${Background})`,
@@ -30,7 +29,7 @@ this.loadBeers();
     .then(res => this.setState({ beers: res.data }))
     .catch(err => console.log(err));
 }
-  }
+  
 
   render() {
     return (
@@ -59,13 +58,13 @@ this.loadBeers();
               {this.state.beers.map(beer => (
                 <BeerCard
                   beer={beer}
+                  _id={beer._id}
                   key={beer._id}
                   beerName={beer.beerName}
                   breweryName={beer.breweryName}
                   beerStyle={beer.beerStyle}
                   tastingNotes={beer.tastingNotes}
                   overallRating={beer.overallRating}
-                  date={beer.date}
                   loadBeers={this.loadBeers}
                 />
               ))}
@@ -87,8 +86,10 @@ this.loadBeers();
           )}
         </div>
       </>
-    );
+   )
   }
 }
+
+
 
 export default Beers;

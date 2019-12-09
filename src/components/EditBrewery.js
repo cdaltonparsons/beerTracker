@@ -1,13 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Background from "../images/hops.jpg";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 
-const backgroundImg = {
-  backgroundImage: `url(${Background})`,
-  color: "white"
-};
 
 class BreweryForm extends Component {
   constructor(props) {
@@ -18,7 +11,6 @@ class BreweryForm extends Component {
       beerName: this.props.beerName,
       location: this.props.location,
       overallRating: this.props.overallRating,
-      date: this.props.date
     };
   }
 
@@ -30,11 +22,6 @@ class BreweryForm extends Component {
     });
   };
 
-  handleDateChange = date => {
-    this.setState({
-      date: date
-    });
-  };
 
   handleFormSubmit = event => {
     event.preventDefault();
@@ -53,12 +40,6 @@ class BreweryForm extends Component {
   render() {
     return (
       <>
-        <div className="jumbotron text-center" style={backgroundImg}>
-          <h1 className="display-3">
-            Keep track of your favorite (or least favorite...) breweries here
-          </h1>
-          <h3>Fill in the form below to save breweries to your profile.</h3>
-        </div>
         <div className="row">
           <div className="col-md-2"></div>
           <div className="col-md-8">
@@ -86,7 +67,7 @@ class BreweryForm extends Component {
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="e.g. Coors Banquet"
+                    placeholder={this.props.beerName}
                     id="beerName"
                     name="beerName"
                     onChange={this.handleInputChange}
@@ -100,22 +81,12 @@ class BreweryForm extends Component {
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="e.g. Denver, CO"
+                    placeholder={this.props.location}
                     id="breweryLocation"
                     name="location"
                     value={this.state.location}
                     onChange={this.handleInputChange}
                   />
-                </div>
-                <div className="form-group">
-                  <label>Date Visited: </label>
-                  <div>
-                    <DatePicker
-                      selected={this.state.date}
-                      onChange={this.handleDateChange}
-                      name="date"
-                    />
-                  </div>
                 </div>
                 <div className="form-group">
                   <label className="col-form-label" htmlFor="overallRating">

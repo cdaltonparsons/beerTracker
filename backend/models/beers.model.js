@@ -8,7 +8,6 @@ const beerSchema = new Schema({
   beerStyle: { type: String,  trim: true  },
   tastingNotes: { type: String,  trim: true  },
   overallRating: { type: Number },
-  date: { type: Date}
 });
 
 const Beer = mongoose.model('Beer', beerSchema);

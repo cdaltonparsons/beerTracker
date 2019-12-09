@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Background from "../images/beers.jpg";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+
 
 const backgroundImg = {
   backgroundImage: `url(${Background})`,
@@ -19,7 +18,6 @@ class BeerForm extends Component {
       beerStyle: this.props.beerStyle,
       tastingNotes: this.props.tastingNotes,
       overallRating: this.props.overallRating,
-      date: this.props.date
     };
   }
 
@@ -28,12 +26,6 @@ class BeerForm extends Component {
 
     this.setState({
       [name]: value
-    });
-  };
-
-  handleDateChange = date => {
-    this.setState({
-      date: date
     });
   };
 
@@ -72,7 +64,7 @@ class BeerForm extends Component {
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Name of Beer"
+                    placeholder={this.props.beerName}
                     id="beerName"
                     name="beerName"
                     value={this.state.beerName}
@@ -86,7 +78,7 @@ class BeerForm extends Component {
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Brewery Name"
+                    placeholder={this.props.breweryName}
                     id="breweryName"
                     name="breweryName"
                     value={this.state.breweryName}
@@ -100,7 +92,7 @@ class BeerForm extends Component {
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Beer Style"
+                    placeholder={this.props.beerStyle}
                     id="beerStyle"
                     name="beerStyle"
                     value={this.state.beerStyle}
@@ -114,20 +106,10 @@ class BeerForm extends Component {
                     id="tastingNotes"
                     rows="3"
                     name="tastingNotes"
-                    placeholder={this.state.tastingNotes}
+                    placeholder={this.props.tastingNotes}
                     value={this.state.tastingNotes}
                     onChange={this.handleInputChange}
                   ></textarea>
-                </div>
-                <div className="form-group">
-                  <label>Date Tasted: </label>
-                  <div>
-                    <DatePicker
-                      selected={this.state.date}
-                      onChange={this.handleDateChange}
-                      name="date"
-                    />
-                  </div>
                 </div>
                 <div className="form-group">
                   <label htmlFor="overallRating">Overall Rating</label>
@@ -135,7 +117,7 @@ class BeerForm extends Component {
                     className="form-control"
                     id="overallRating"
                     name="overallRating"
-                    value={this.state.overallRating}
+                    value={this.props.overallRating}
                     onChange={this.handleInputChange}
                   >
                     <option value="1">1 (Hated it)</option>

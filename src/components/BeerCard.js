@@ -13,8 +13,7 @@ const BeerCard = props => {
         <div className="card-header">{props.beerName}</div>
         <div className="card-body row">
           <p className="card-text">
-            {props.beerName} is a {props.beerStyle}, you drank it on
-            {props.date.substring(0, 10)}.
+            {props.beerName} is a {props.beerStyle}.
           </p>
           <p className="card-text">It is brewed by {props.breweryName}</p>
           <p className="card-text">

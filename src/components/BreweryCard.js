@@ -1,32 +1,56 @@
-import React from "react";
-import {Link} from "react-router-dom";
+import React, { Component } from "react";
+import BrewerySummary from "./BrewerySummary";
+import EditBrewery from "./EditBrewery";
 
-const BreweryCard = props => {
-  return (
-    <>
-      <div className="col-md-6">
-        <div className="card text-white bg-info">
-          <div className="card-header">{props.breweryName}</div>
-          <div className="card-body row">
-            <p className="card-text">
-              {props.breweryName} is located in {props.location}, and you
-              visited on {props.date.substring(0, 10)}.
-            </p>
+class BreweryCard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      _id: this.props._id,
+      breweryName: this.props.breweryName,
+      beerName: this.props.beerName,
+      location: this.props.location,
+      overallRating: this.props.overallRating,
+      editActive: false
+    };
+  }
+
+  handleEdit = event => {
+    if (this.state.editActive) {
+      this.setState({
+        editActive: false
+      });
+    } else {
+      this.setState({
+        editActive: true
+      });
+    }
+  };
+
+  render() {
+    return (
+      <>
+        <div className="col-md-6">
+          <div className="card text-white bg-info">
+            <div className="card-header">
+              <h1>{this.props.breweryName}</h1>
+              <button className="btn btn-secondary align-self-end" id={this.state._id} onClick={(e) => {this.handleEdit(e)}}>Edit Brewery</button>
+              </div>
+            {this.state.editActive ? (
+              <EditBrewery {...this.props}
+              brewery={this.state}
+              handleEdit={this.handleEdit}
+              loadBreweries={this.props.loadBreweries}
+              />
+            ) : (
+              <BrewerySummary {...this.props} />
+            )}
+            
           </div>
-          <div className="card-body row">
-              <p className="card-text">
-                  Overall, you rated {props.breweryName}: {props.overallRating} out of 10.
-              </p>
-          </div>
-          <div className="card-body row">
-          <Link className="btn btn-primary btn-lg" to="/editbrewery">
-            Edit
-          </Link>
         </div>
-        </div>
-      </div>
-    </>
-  );
-};
+      </>
+    );
+  }
+}
 
 export default BreweryCard;

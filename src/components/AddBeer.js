@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Background from "../images/beers.jpg";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+
 
 const backgroundImg = {
   backgroundImage: `url(${Background})`,
@@ -18,7 +17,6 @@ class BeerForm extends Component {
       beerStyle: "",
       tastingNotes: "",
       overallRating: 5,
-      date: new Date()
     };
   }
 
@@ -30,12 +28,6 @@ class BeerForm extends Component {
     });
   };
 
-  handleDateChange = date => {
-    this.setState({
-      date: date
-    });
-  };
-
   handleFormSubmit = event => {
     event.preventDefault();
     const beer = {
@@ -44,21 +36,19 @@ class BeerForm extends Component {
       beerStyle: this.state.beerStyle,
       tastingNotes: this.state.tastingNotes,
       overallRating: this.state.overallRating,
-      date: this.state.date
     };
     console.log(beer);
 
     axios
       .post("http://localhost:5000/beers/add", beer)
-      .then(res => alert(`Cheers! ${this.state.beerName} has successfully been added`));
+      .then(() => alert(`Cheers! ${this.state.beerName} has successfully been added.`));
 
       this.setState({
         beerName: "",
         breweryName: "",
         beerStyle: "",
         tastingNotes: "",
-        overallRating: 5,
-        date: new Date()
+        overallRating: 5
       })
 
   };
@@ -133,16 +123,6 @@ class BeerForm extends Component {
                     value={this.state.tastingNotes}
                     onChange={this.handleInputChange}
                   ></textarea>
-                </div>
-                <div className="form-group">
-                  <label>Date Tasted: </label>
-                  <div>
-                    <DatePicker
-                      selected={this.state.date}
-                      onChange={this.handleDateChange}
-                      name="date"
-                    />
-                  </div>
                 </div>
                 <div className="form-group">
                   <label htmlFor="overallRating">Overall Rating</label>

@@ -13,7 +13,6 @@ router.route('/add').post((req, res) => {
   const beerStyle = req.body.beerStyle;
   const tastingNotes = req.body.tastingNotes;
   const overallRating = req.body.overallRating;
-  const date = Date.parse(req.body.date)
 
   const newBeer = new Beers({
     beerName,
@@ -21,7 +20,6 @@ router.route('/add').post((req, res) => {
     beerStyle,
     tastingNotes,
     overallRating,
-    date
   });
 
   newBeer
@@ -49,7 +47,6 @@ router.route('/update/:id').post((req, res) => {
     beer.beerStyle = req.body.beerStyle;
     beer.tastingNotes = req.body.tastingNotes;
     beer.overallRating = req.body.overallRating;
-    beer.date = req.body.date;
 
     beer
       .save()

@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Background from "../images/hops.jpg";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+
 
 const backgroundImg = {
   backgroundImage: `url(${Background})`,
@@ -17,7 +16,6 @@ class BreweryForm extends Component {
       beerName: "",
       location: "",
       overallRating: 5,
-      date: new Date()
     };
   }
 
@@ -29,11 +27,6 @@ class BreweryForm extends Component {
     });
   };
 
-  handleDateChange = date => {
-    this.setState({
-      date: date
-    });
-  };
 
   handleFormSubmit = event => {
     event.preventDefault();
@@ -43,13 +36,19 @@ class BreweryForm extends Component {
       beerName: this.state.beerName,
       location: this.state.location,
       overallRating: this.state.overallRating,
-      date: this.state.date
     };
     console.log(brewery);
 
     axios
-      .post("http://localhost5000/breweries/", brewery)
-      .then(res => console.log(res.data));
+      .post("http://localhost:5000/breweries/add", brewery)
+      .then(() => alert(`Cheers! ${this.state.breweryName} has successfully been saved!`));
+
+      this.setState({
+        breweryName: "",
+        beerName: "",
+        location: "",
+        overallRating: 5
+      })
   };
 
   render() {
@@ -108,16 +107,6 @@ class BreweryForm extends Component {
                     value={this.state.location}
                     onChange={this.handleInputChange}
                   />
-                </div>
-                <div className="form-group">
-                  <label>Date Visited: </label>
-                  <div>
-                    <DatePicker
-                      selected={this.state.date}
-                      onChange={this.handleDateChange}
-                      name="date"
-                    />
-                  </div>
                 </div>
                 <div className="form-group">
                   <label className="col-form-label" htmlFor="overallRating">
