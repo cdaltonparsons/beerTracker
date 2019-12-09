@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import axios from "axios";
 import Background from "../images/beers.jpg";
 
-
 const backgroundImg = {
   backgroundImage: `url(${Background})`,
   color: "white"
@@ -16,7 +15,7 @@ class BeerForm extends Component {
       breweryName: "",
       beerStyle: "",
       tastingNotes: "",
-      overallRating: 5,
+      overallRating: 5
     };
   }
 
@@ -35,22 +34,25 @@ class BeerForm extends Component {
       breweryName: this.state.breweryName,
       beerStyle: this.state.beerStyle,
       tastingNotes: this.state.tastingNotes,
-      overallRating: this.state.overallRating,
+      overallRating: this.state.overallRating
     };
     console.log(beer);
 
     axios
       .post("http://localhost:5000/beers/add", beer)
-      .then(() => alert(`Cheers! ${this.state.beerName} has successfully been added.`));
-
-      this.setState({
-        beerName: "",
-        breweryName: "",
-        beerStyle: "",
-        tastingNotes: "",
-        overallRating: 5
-      })
-
+      .then(() =>
+        alert(`Cheers! ${this.state.beerName} has successfully been added.`)
+      )
+      .then(
+        this.setState({
+          beerName: "",
+          breweryName: "",
+          beerStyle: "",
+          tastingNotes: "",
+          overallRating: 5
+        })
+      )
+      .catch(err => console.log("Error: " + err));
   };
 
   render() {
