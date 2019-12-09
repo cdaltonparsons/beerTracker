@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import BreweryCard from "./BreweryCard";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import Background from "../images/beers.jpg";
+import API from "../utils/API";
 
 
 const backgroundImg = {
@@ -25,8 +25,7 @@ class Breweries extends Component {
   }
 
   loadBreweries = () => {
-    axios
-      .get("http://localhost:5000/breweries/")
+    API.getBreweries()
       .then(res => this.setState({ breweries: res.data }))
       .catch(err => console.log(err));
   };

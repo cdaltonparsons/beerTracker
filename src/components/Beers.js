@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import BeerCard from "./BeerCard";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import Background from "../images/beers.jpg";
+import API from "../utils/API";
 
 
 const backgroundImg = {
@@ -24,8 +24,7 @@ this.loadBeers();
   }
 
   loadBeers = () => {
-    axios
-    .get("http://localhost:5000/beers/")
+    API.getBeers()
     .then(res => this.setState({ beers: res.data }))
     .catch(err => console.log(err));
 }
